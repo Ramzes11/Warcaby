@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 void wypisz_plansze(szachownica *sz){
     printf("   +---+---+---+---+---+---+---+---+\n");
     for(int i = 0; i < 8; i++)
@@ -23,11 +24,11 @@ void policz_biale_czarne(szachownica *sz){
             if(sz->plansza[i][j] == czarna_damka) cd++;
         }
     }
-    sz->liczba_bialych=b;
-    sz->liczba_czarnych=c;
+    sz->liczba_bialych = b;
+    sz->liczba_czarnych = c;
     //sz->liczba_bialych_d=bd;
     //sz->liczba_czarnych_d=cd;
-    sz->wartosc_planszy=b-c;
+    sz->wartosc_planszy = b-c;
     
     if((b+bd)==0)
         sz->ocena = -100;
@@ -45,14 +46,14 @@ void pozycje(szachownica *sz){
         for (int kolumna = 0; kolumna < 8; kolumna++){
             
             if(sz->plansza[wiersz][kolumna] == bialy){
-                sz->pozycje_bialych[b][0]=wiersz+1;
-                sz->pozycje_bialych[b][1]=kolumna+1;
+                sz->pozycje_bialych[b][0]=wiersz;
+                sz->pozycje_bialych[b][1]=kolumna;
                 b++;
                 }
 
             if(sz->plansza[wiersz][kolumna] == czarny){
-                sz->pozycje_czarnych[c][0]=wiersz+1;
-                sz->pozycje_czarnych[c][1]=kolumna+1;
+                sz->pozycje_czarnych[c][0]=wiersz;
+                sz->pozycje_czarnych[c][1]=kolumna;
                 c++;
                 }
         }

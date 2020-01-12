@@ -16,11 +16,13 @@ void main(){
     
     clock_t start = clock();
     
-        //int ocena = alfabeta(&stan, 2, -1000000, 1000000);
-        //int ocena = alfabeta_po_calosci(&stan, 2, -1000000, 1000000);
+        //int ocena = alfabeta(&stan, 2, -100, 100);
+        //int ocena = alfabeta_po_calosci(&stan, 2, -100, 100);
 
     clock_t stop = clock();
   //printf("Ocena: %d\n", ocena);
     printf("\nIle bialych: %d\nIle czarnych: %d\n Czyja tura: %d\n Ocena: %d\n ile bd: ", stan.liczba_bialych, stan.liczba_czarnych, stan.tura, stan.ocena);
     printf("\n\ntime: %f s\n", 1.0 * (stop - start) / CLOCKS_PER_SEC);
 } 
+
+

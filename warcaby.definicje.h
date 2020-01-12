@@ -11,8 +11,6 @@ typedef struct {
     int liczba_bialych;
     int liczba_czarnych;
     int wartosc_planszy;
-    //int liczba_czarnych_d;
-    //int liczba_bialych_d;
     kto tura;
     int ocena;
     int pozycje_bialych[3][15];
@@ -28,7 +26,7 @@ typedef struct{
 
 typedef struct {
     pole z, na;
-    pole zbicie;
+    listazbic *zbicie;
 } ruch;
 
 
@@ -36,4 +34,5 @@ typedef struct {
     ruch r;
     void* nast;
 } listaruchow;
+
 
