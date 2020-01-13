@@ -20,8 +20,8 @@ void policz_biale_czarne(szachownica *sz){
         for(int j=0; j<8; j++){
             if(sz->plansza[i][j] == bialy) b++;
             if(sz->plansza[i][j] == czarny) c++;
-            if(sz->plansza[i][j] == biala_damka) bd++;
-            if(sz->plansza[i][j] == czarna_damka) cd++;
+            //if(sz->plansza[i][j] == biala_damka) bd++;
+            //if(sz->plansza[i][j] == czarna_damka) cd++;
         }
     }
     sz->liczba_bialych = b;

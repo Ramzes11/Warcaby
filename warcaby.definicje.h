@@ -1,5 +1,4 @@
 
-
 typedef enum { pusty = 0, bialy = 1, czarny = 2, biala_damka = 3, czarna_damka = 4} figura; 
 
 typedef enum { biale = 0, czarne = 1 } kto;
@@ -24,9 +23,16 @@ typedef struct{
 }pole;
 
 
+typedef struct{
+    pole point;
+    void *nast;
+} listazbic;
+
+
 typedef struct {
     pole z, na;
     listazbic *zbicie;
+    int czy_bicie;
 } ruch;
 
 
@@ -34,5 +40,7 @@ typedef struct {
     ruch r;
     void* nast;
 } listaruchow;
+
+
 
 
