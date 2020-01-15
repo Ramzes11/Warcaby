@@ -52,15 +52,10 @@ void zniszczzbicia(listazbic* z){
 
 int ilosc_zbic(listazbic* z){
     int i=0;
-    if(z == NULL){
-        return i;
-    }
-
-    listazbic *tmp = z;
-    while(tmp->nast != NULL){
-        tmp = tmp->nast;
+    while(z != NULL){
         i++;
-    } 
+        z = z->nast;
+    }
 
     return i;
 }
@@ -146,6 +141,7 @@ void ruch_zwykly_czarny(szachownica *sz, listaruchow *l){
 void ruch_zwykly_bialy(szachownica *sz, listaruchow *l){
     
     for(int i=1; i<sz->liczba_bialych; i++){
+        printf("ruch zwykly bialy\n");
             if(sz->plansza[sz->pozycje_bialych[i][0]+1][sz->pozycje_bialych[i][1]+1] == pusty){
                 ruch r;
                 r.z.wiersz = sz->pozycje_bialych[i][0];
@@ -170,7 +166,7 @@ void ruch_zwykly_bialy(szachownica *sz, listaruchow *l){
 
 
 int bicie_obowiazkowe_czarne(szachownica *sz, listaruchow* l){
-        for(int i=1; i<sz->liczba_czarnych; i++){
+        for(int i=1; i<=sz->liczba_czarnych; i++){
             bicie_czarnym(sz, l, sz->pozycje_czarnych[i][0], sz->pozycje_czarnych[i][1], sz->pozycje_czarnych[i][0], sz->pozycje_czarnych[i][1], NULL, 0); 
         }
 }
@@ -194,11 +190,36 @@ int bicie_czarnym(szachownica *sz, listaruchow *l, int x, int y, int x_z, int y_
         pole p;
         listazbic * zbi = NULL;
 
-        memcpy(zbi, zbicia, iloscZbic(zbicia));
+        memcpy(zbi, zbicia, ilosc_zbic(zbicia));
         zbi = dodaj_zbicie(zbi, p);
 
         bicie_bialym(sz, l, x-2, y+2, x_z, y_z, zbi, 1);
     }
+
+/*  BICIE DO TYLU
+    if(sz->plansza[x+1][y-1] == bialy && sz->plansza[x+2][y-2] == pusty){
+        wartownik += 1;
+        pole p;
+        listazbic * zbi = NULL;
+
+        memcpy(zbi, zbicia, ilosc_zbic(zbicia));
+        zbi = dodaj_zbicie(zbi, p);
+
+        bicie_czarnym(sz, l, x+2, y-2, x_z, y_z, zbi, 1);
+    }
+
+    if(sz->plansza[x+1][y+1] == bialy && sz->plansza[x+2][y+2] == pusty){
+        wartownik += 1;
+        pole p;
+        listazbic * zbi = NULL;
+
+        memcpy(zbi, zbicia, ilosc_zbic(zbicia));
+        zbi = dodaj_zbicie(zbi, p);
+
+        bicie_bialym(sz, l, x+2, y+2, x_z, y_z, zbi, 1);
+    }
+
+*/
 
     if(wartownik == 0 && czyCosZbil != 0){
         ruch r;
@@ -219,7 +240,8 @@ int bicie_czarnym(szachownica *sz, listaruchow *l, int x, int y, int x_z, int y_
 
 
 int bicie_obowiazkowe_biale(szachownica *sz, listaruchow* l){
-        for(int i=1; i<sz->liczba_bialych; i++){
+        for(int i=1; i<=sz->liczba_bialych; i++){
+            printf("sprawdzam bicie obowiazkowe bialym\n");
             bicie_bialym(sz, l, sz->pozycje_bialych[i][0], sz->pozycje_bialych[i][1], sz->pozycje_bialych[i][0], sz->pozycje_bialych[i][1], NULL, 0); 
         }
 }
@@ -227,6 +249,7 @@ int bicie_obowiazkowe_biale(szachownica *sz, listaruchow* l){
 
 int bicie_bialym(szachownica *sz, listaruchow *l, int x, int y, int x_z, int y_z, listazbic * zbicia, int czyCosZbil){
     int wartownik = 0;
+    printf("Jestem w funkcji bicie bialym\n");
     if(sz->plansza[x+1][y-1] == czarny && sz->plansza[x+2][y-2] == pusty){
         wartownik += 1;
         pole p;
@@ -243,11 +266,35 @@ int bicie_bialym(szachownica *sz, listaruchow *l, int x, int y, int x_z, int y_z
         pole p;
         listazbic * zbi = NULL;
 
-        memcpy(zbi, zbicia, iloscZbic(zbicia));
+        memcpy(zbi, zbicia, ilosc_zbic(zbicia));
         zbi = dodaj_zbicie(zbi, p);
 
         bicie_bialym(sz, l, x+2, y+2, x_z, y_z, zbi, 1);
     }
+
+/* BICIE DO TYLU
+    if(sz->plansza[x-1][y-1] == czarny && sz->plansza[x-2][y-2] == pusty){
+        wartownik += 1;
+        pole p;
+        listazbic * zbi = NULL;
+
+        memcpy(zbi, zbicia, ilosc_zbic(zbicia));
+        zbi = dodaj_zbicie(zbi, p);
+
+        bicie_bialym(sz, l, x-2, y-2, x_z, y_z, zbi, 1);
+    }
+
+    if(sz->plansza[x-1][y+1] == czarny && sz->plansza[x-2][y+2] == pusty){
+        wartownik += 1;
+        pole p;
+        listazbic * zbi = NULL;
+
+        memcpy(zbi, zbicia, ilosc_zbic(zbicia));
+        zbi = dodaj_zbicie(zbi, p);
+
+        bicie_bialym(sz, l, x-2, y+2, x_z, y_z, zbi, 1);
+    }
+*/
 
     if(wartownik == 0 && czyCosZbil != 0){
         ruch r;
@@ -271,9 +318,12 @@ int bicie_bialym(szachownica *sz, listaruchow *l, int x, int y, int x_z, int y_z
 
 
 void generuj_ruch(szachownica *sz, listaruchow *l){
+    printf("Generuje ruch\n");
     if(sz->tura == biale){
+        printf("tura bialych\n");
         bicie_obowiazkowe_biale(sz, l);
         
+        printf("Jestem po biciu obowiazkowym\n");
         if(l == NULL)
             ruch_zwykly_bialy(sz, l);
     }
@@ -291,7 +341,8 @@ void generuj_ruch(szachownica *sz, listaruchow *l){
 
 
 void wykonaj_ruch(szachownica *sz, szachownica *dziecko, ruch r){
-    
+    printf("Wykonuje ruch\n");
+
     for(int wiersz=0; wiersz<8; wiersz++)
         for(int kolumna=0; kolumna<8; kolumna++)
             dziecko->plansza[wiersz][kolumna] = sz->plansza[wiersz][kolumna];

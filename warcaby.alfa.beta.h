@@ -10,7 +10,7 @@ int alfabeta(szachownica *sz, int glebokosc, int alfa, int beta){
  
 
     for(; l; l = (listaruchow *)l->nast){
-
+        printf("Jestem w petli listy ruchow\n");
         szachownica dziecko;
         wykonaj_ruch(sz, &dziecko, l->r);
 

@@ -6,7 +6,6 @@
 #include"warcaby.alfa.beta.h"
 #include"warcaby.wykonaj.ruch.h"
 
-
 void main(){
     szachownica stan;
     //ustawFEN(&stan, "c1c1c1c1/BCbc1111/3bb2C/BB4Cc/5c2/8/6B1/c7");
